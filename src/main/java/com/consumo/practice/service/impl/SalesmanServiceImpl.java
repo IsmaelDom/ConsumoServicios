@@ -1,10 +1,13 @@
 package com.consumo.practice.service.impl;
 
+import java.util.Objects;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.consumo.practice.dto.SalesmanRequestDTO;
+import com.consumo.practice.dto.SalesmanResponseDTO;
 import com.consumo.practice.exception.GeneralException;
 import com.consumo.practice.models.Salesman;
 import com.consumo.practice.mybatis.mapper.SalesmanMapper;
@@ -44,6 +47,24 @@ public class SalesmanServiceImpl implements ISalesmanService {
 		}
 		
 		return resp;
+	}
+
+	@Override
+	public SalesmanResponseDTO getVendedorById(Long idSalesman) throws GeneralException {
+		SalesmanResponseDTO dto = new SalesmanResponseDTO();
+		
+		if (idSalesman != null && !Objects.isNull(idSalesman)) {
+			Salesman salesman = salesmanMapper.getSalesmanById(idSalesman);
+			
+			if (salesman != null) {
+				dto = modelMapper.map(salesman, SalesmanResponseDTO.class);
+			} else {
+				log.warning("No se encontraron datos para el id " + idSalesman);
+			}
+		} else {
+			throw new GeneralException("El id no puede estar vacio", 404);
+		}
+		return dto;
 	}
 
 }
