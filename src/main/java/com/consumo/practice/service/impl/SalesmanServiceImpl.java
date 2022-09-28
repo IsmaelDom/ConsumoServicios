@@ -11,7 +11,7 @@ import com.consumo.practice.dto.SalesmanRequestDTO;
 import com.consumo.practice.dto.SalesmanResponseDTO;
 import com.consumo.practice.exception.GeneralException;
 import com.consumo.practice.models.Salesman;
-import com.consumo.practice.mybatis.mapper.SalesmanMapper;
+import com.consumo.practice.repository.SalesmanMapper;
 import com.consumo.practice.service.ISalesmanService;
 import com.consumo.practice.util.Utils;
 
@@ -31,13 +31,11 @@ public class SalesmanServiceImpl implements ISalesmanService {
 		String resp;
 		
 		if (!salesman.getCity().isEmpty() && !salesman.getNombre().isEmpty() && salesman.getCommission() != null) {
-			Salesman entidadSales = new Salesman();
-			
-			entidadSales = modelMapper.map(salesman, Salesman.class);
+			Salesman entidadSales = modelMapper.map(salesman, Salesman.class);
 			int respuesta = salesmanMapper.insert(entidadSales);
 			
 			if (respuesta == 1) {
-				log.info("Creaci�n correcta del vendedor: " + entidadSales.getNombre());
+				log.info("Creación correcta del vendedor: " + entidadSales.getNombre());
 				resp = "Se creo el vendedor " + entidadSales.getNombre();
 			} else {
 				log.info("Error al crear el vendedor");
@@ -55,7 +53,7 @@ public class SalesmanServiceImpl implements ISalesmanService {
 	public SalesmanResponseDTO getVendedorById(Long idSalesman) throws GeneralException {
 		SalesmanResponseDTO dto = new SalesmanResponseDTO();
 		
-		if (idSalesman != null && !Objects.isNull(idSalesman)) {
+		if (idSalesman != null) {
 			Salesman salesman = salesmanMapper.getSalesmanById(idSalesman);
 			
 			if (salesman != null) {
@@ -72,9 +70,42 @@ public class SalesmanServiceImpl implements ISalesmanService {
 	@Override
 	public List<SalesmanResponseDTO> getAllVendedores() {
 		List<Salesman> array = salesmanMapper.getAllVendedores();
-		List<SalesmanResponseDTO> arrayDto = Utils.mapList(array, SalesmanResponseDTO.class);
-		
-		return arrayDto;
+		return Utils.mapList(array, SalesmanResponseDTO.class);
+	}
+
+	@Override
+	public String actualizarVendedores(SalesmanRequestDTO salesmanDTO) throws GeneralException {
+		String response;
+
+		if (salesmanDTO.getIdSalesman() != null) {
+			Salesman vendedor = salesmanMapper.getSalesmanById(salesmanDTO.getIdSalesman());
+
+			if (!Objects.isNull(vendedor)) {
+				if (!salesmanDTO.getNombre().isEmpty() && salesmanDTO.getCommission() != null
+						&& salesmanDTO.getCity() != null && !salesmanDTO.getCity().equals("")) {
+
+					Salesman entidadSales = modelMapper.map(salesmanDTO, Salesman.class);
+					int respuesta = salesmanMapper.actualizarSalesman(entidadSales);
+
+					if (respuesta == 1) {
+						log.info("Edición correcta del vendedor: " + entidadSales.getNombre());
+						response = "Se edito el vendedor " + entidadSales.getNombre();
+					} else {
+						log.info("Error al editar el vendedor");
+						response = "Error al intentar editar el vendedor " + entidadSales.getNombre();
+					}
+				} else {
+					throw new GeneralException("Favor de ingresar los campos requeridos", 400);
+				}
+			} else {
+				throw new GeneralException("No se encontro el vendedor ingresado", 404);
+			}
+
+		} else {
+			throw new GeneralException("El id del vendedor es requerido", 400);
+		}
+
+		return response;
 	}
 	
 }

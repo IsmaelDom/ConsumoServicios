@@ -14,4 +14,6 @@ public interface ISalesmanService {
 	
 	List<SalesmanResponseDTO> getAllVendedores();
 
+	String actualizarVendedores(SalesmanRequestDTO salesman) throws GeneralException;
+	
 }

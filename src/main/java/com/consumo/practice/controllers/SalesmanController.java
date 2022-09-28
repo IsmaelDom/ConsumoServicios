@@ -1,6 +1,7 @@
 package com.consumo.practice.controllers;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,11 +38,11 @@ public class SalesmanController {
 		try {
 			return salesmanService.guardarVendedor(salesmanDto);
 		} catch (GeneralException e) {
-			((HttpServletResponse) response).sendError(e.getCodigoError(), e.getMessage());
+			(response).sendError(e.getCodigoError(), e.getMessage());
             return null;
 		} catch (Exception e) {
             e.printStackTrace();
-            ((HttpServletResponse) response).sendError(500, e.getMessage());
+            (response).sendError(500, e.getMessage());
             return null;
         }
 	}
@@ -52,11 +54,11 @@ public class SalesmanController {
 		try {
 			return salesmanService.getVendedorById(id);
 		} catch (GeneralException e) {
-			((HttpServletResponse) response).sendError(e.getCodigoError(), e.getMessage());
+			(response).sendError(e.getCodigoError(), e.getMessage());
             return null;
 		} catch (Exception e) {
             e.printStackTrace();
-            ((HttpServletResponse) response).sendError(500, e.getMessage());
+            (response).sendError(500, e.getMessage());
             return null;
         }
 	}
@@ -68,7 +70,22 @@ public class SalesmanController {
 			return salesmanService.getAllVendedores();
 		} catch (Exception e) {
             e.printStackTrace();
-            ((HttpServletResponse) response).sendError(500, e.getMessage());
+            (response).sendError(500, e.getMessage());
+            return Collections.emptyList();
+        }
+	}
+	
+	@PutMapping("/Editar")
+	@ApiOperation(value = "Mybatis editar vendedor", notes = "Edita un vendedor")
+	public String editaVededor(HttpServletResponse response, @RequestBody SalesmanRequestDTO salesmanDto) throws IOException {
+		try {
+			return salesmanService.actualizarVendedores(salesmanDto);
+		} catch (GeneralException e) {
+			(response).sendError(e.getCodigoError(), e.getMessage());
+            return null;
+		} catch (Exception e) {
+            e.printStackTrace();
+            (response).sendError(500, e.getMessage());
             return null;
         }
 	}

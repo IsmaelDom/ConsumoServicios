@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.consumo.practice.models.Entidad;
-import com.consumo.practice.mybatis.mapper.EntidadMapper;
+import com.consumo.practice.repository.EntidadMapper;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
