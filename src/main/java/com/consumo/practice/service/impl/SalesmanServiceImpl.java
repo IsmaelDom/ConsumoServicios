@@ -1,5 +1,6 @@
 package com.consumo.practice.service.impl;
 
+import java.util.List;
 import java.util.Objects;
 
 import org.modelmapper.ModelMapper;
@@ -12,6 +13,7 @@ import com.consumo.practice.exception.GeneralException;
 import com.consumo.practice.models.Salesman;
 import com.consumo.practice.mybatis.mapper.SalesmanMapper;
 import com.consumo.practice.service.ISalesmanService;
+import com.consumo.practice.util.Utils;
 
 import lombok.extern.java.Log;
 
@@ -67,4 +69,12 @@ public class SalesmanServiceImpl implements ISalesmanService {
 		return dto;
 	}
 
+	@Override
+	public List<SalesmanResponseDTO> getAllVendedores() {
+		List<Salesman> array = salesmanMapper.getAllVendedores();
+		List<SalesmanResponseDTO> arrayDto = Utils.mapList(array, SalesmanResponseDTO.class);
+		
+		return arrayDto;
+	}
+	
 }

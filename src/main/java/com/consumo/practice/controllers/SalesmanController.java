@@ -1,6 +1,7 @@
 package com.consumo.practice.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -53,6 +54,18 @@ public class SalesmanController {
 		} catch (GeneralException e) {
 			((HttpServletResponse) response).sendError(e.getCodigoError(), e.getMessage());
             return null;
+		} catch (Exception e) {
+            e.printStackTrace();
+            ((HttpServletResponse) response).sendError(500, e.getMessage());
+            return null;
+        }
+	}
+	
+	@GetMapping("getAll")
+	@ApiOperation(value = "Mybatis consultar todos los vendedores", notes = "Consultar todos los vendedores")
+	public List<SalesmanResponseDTO> getAllVendedor(HttpServletResponse response) throws IOException {
+		try {
+			return salesmanService.getAllVendedores();
 		} catch (Exception e) {
             e.printStackTrace();
             ((HttpServletResponse) response).sendError(500, e.getMessage());

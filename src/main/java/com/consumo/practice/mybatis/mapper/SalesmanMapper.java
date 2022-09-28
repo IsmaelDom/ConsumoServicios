@@ -1,5 +1,7 @@
 package com.consumo.practice.mybatis.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -24,4 +26,8 @@ public interface SalesmanMapper {
 			  @Result(property = "commission", column = "COMMISSION")
 			})
 	Salesman getSalesmanById(Long id);
+	
+	@Select("SELECT * FROM SYSTEM.SALESMAN")
+	List<Salesman> getAllVendedores();
+	
 }
