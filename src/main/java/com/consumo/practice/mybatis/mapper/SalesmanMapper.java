@@ -28,6 +28,12 @@ public interface SalesmanMapper {
 	Salesman getSalesmanById(Long id);
 	
 	@Select("SELECT * FROM SYSTEM.SALESMAN")
+	@Results(value = {
+			  @Result(property = "idSalesman", column = "SALESMAN_ID"),
+			  @Result(property = "nombre", column = "NOMBRE"),
+			  @Result(property = "city", column = "CITY"),
+			  @Result(property = "commission", column = "COMMISSION")
+			})
 	List<Salesman> getAllVendedores();
 	
 }
