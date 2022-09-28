@@ -1,4 +1,4 @@
-package com.consumo.practice.mybatis.mapper;
+package com.consumo.practice.repository;
 
 import java.util.List;
 
@@ -8,8 +8,10 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.consumo.practice.models.Salesman;
+
 
 @Mapper
 public interface SalesmanMapper {
@@ -35,5 +37,8 @@ public interface SalesmanMapper {
 			  @Result(property = "commission", column = "COMMISSION")
 			})
 	List<Salesman> getAllVendedores();
+	
+	@Update("UPDATE SYSTEM.SALESMAN SET NOMBRE = #{nombre}, CITY = #{city}, COMMISSION = #{commission} WHERE SALESMAN_ID = #{idSalesman}")
+	Integer actualizarSalesman(Salesman salesman);
 	
 }

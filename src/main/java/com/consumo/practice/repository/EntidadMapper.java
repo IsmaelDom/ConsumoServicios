@@ -1,4 +1,4 @@
-package com.consumo.practice.mybatis.mapper;
+package com.consumo.practice.repository;
 
 import java.util.List;
 
