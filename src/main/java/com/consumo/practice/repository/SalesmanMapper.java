@@ -13,7 +13,6 @@ import org.apache.ibatis.annotations.Update;
 
 import com.consumo.practice.models.Salesman;
 
-
 @Mapper
 public interface SalesmanMapper {
 
