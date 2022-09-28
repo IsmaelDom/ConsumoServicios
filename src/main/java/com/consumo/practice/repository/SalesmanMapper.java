@@ -2,6 +2,7 @@ package com.consumo.practice.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -41,4 +42,6 @@ public interface SalesmanMapper {
 	@Update("UPDATE SYSTEM.SALESMAN SET NOMBRE = #{nombre}, CITY = #{city}, COMMISSION = #{commission} WHERE SALESMAN_ID = #{idSalesman}")
 	Integer actualizarSalesman(Salesman salesman);
 	
+	@Delete("DELETE FROM SYSTEM.SALESMAN WHERE SALESMAN_ID = #{id}")
+	Integer eliminarSalesman(Long id);
 }

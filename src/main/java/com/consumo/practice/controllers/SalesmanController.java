@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,7 +80,7 @@ public class SalesmanController {
 	@ApiOperation(value = "Mybatis editar vendedor", notes = "Edita un vendedor")
 	public String editaVededor(HttpServletResponse response, @RequestBody SalesmanRequestDTO salesmanDto) throws IOException {
 		try {
-			return salesmanService.actualizarVendedores(salesmanDto);
+			return salesmanService.actualizarVendedor(salesmanDto);
 		} catch (GeneralException e) {
 			(response).sendError(e.getCodigoError(), e.getMessage());
             return null;
@@ -88,5 +89,21 @@ public class SalesmanController {
             (response).sendError(500, e.getMessage());
             return null;
         }
+	}
+	
+	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Mybatis eliminar vendedor por id", notes = "Eliminar un vendedor por id")
+	public String eliminarVendedor(HttpServletResponse response,
+			@ApiParam(name = "id", value = "id del vendedor", example = "1", required = true) @PathVariable long id) throws IOException {
+		try {
+			return salesmanService.eliminarVendedor(id);
+		} catch (GeneralException e) {
+			(response).sendError(e.getCodigoError(), e.getMessage());
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			(response).sendError(500, e.getMessage());
+			return null;
+		}
 	}
 }

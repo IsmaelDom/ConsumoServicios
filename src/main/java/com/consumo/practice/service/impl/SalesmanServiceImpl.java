@@ -74,7 +74,7 @@ public class SalesmanServiceImpl implements ISalesmanService {
 	}
 
 	@Override
-	public String actualizarVendedores(SalesmanRequestDTO salesmanDTO) throws GeneralException {
+	public String actualizarVendedor(SalesmanRequestDTO salesmanDTO) throws GeneralException {
 		String response;
 
 		if (salesmanDTO.getIdSalesman() != null) {
@@ -105,6 +105,31 @@ public class SalesmanServiceImpl implements ISalesmanService {
 			throw new GeneralException("El id del vendedor es requerido", 400);
 		}
 
+		return response;
+	}
+
+	@Override
+	public String eliminarVendedor(Long id) throws GeneralException {
+		String response;
+		
+		if (id != null) {
+			Salesman vendedor = salesmanMapper.getSalesmanById(id);
+			if (!Objects.isNull(vendedor)) {
+				int respuesta = salesmanMapper.eliminarSalesman(id);
+
+				if (respuesta == 1) {
+					log.info("Se elimino correctamente el vendedor: " + vendedor.getNombre());
+					response = "Se elimino el vendedor " + vendedor.getNombre();
+				} else {
+					log.info("Error al eliminar el vendedor");
+					response = "Error al intentar eliminar el vendedor " + vendedor.getNombre();
+				}
+			} else {
+				throw new GeneralException("No se encontro el vendedor " + id, 404);
+			}
+		} else {
+			throw new GeneralException("El id del vendedor es requerido", 400);
+		}
 		return response;
 	}
 	
