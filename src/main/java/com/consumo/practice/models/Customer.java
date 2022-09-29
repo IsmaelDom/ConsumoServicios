@@ -17,4 +17,6 @@ public class Customer {
 	private Long grade;
 	private Long salesmanId;
 	
+	// Campo para guardar el nombre del salesman
+	private String salesman;
 }

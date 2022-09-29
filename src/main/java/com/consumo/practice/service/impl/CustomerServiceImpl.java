@@ -1,5 +1,6 @@
 package com.consumo.practice.service.impl;
 
+import java.util.List;
 import java.util.Objects;
 
 import org.modelmapper.ModelMapper;
@@ -7,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.consumo.practice.dto.CustomerRequestDTO;
+import com.consumo.practice.dto.CustomerResponseDTO;
 import com.consumo.practice.exception.GeneralException;
 import com.consumo.practice.models.Customer;
 import com.consumo.practice.repository.CustomerMapper;
 import com.consumo.practice.service.ICustomerService;
+import com.consumo.practice.util.Utils;
 
 import lombok.extern.java.Log;
 
@@ -22,6 +25,12 @@ public class CustomerServiceImpl implements ICustomerService {
 	private CustomerMapper customerMapper;
 	
 	ModelMapper modelMapper = new ModelMapper();
+	
+	@Override
+	public List<CustomerResponseDTO> getAllClientes() {
+		List<Customer> array = customerMapper.getAll();
+		return Utils.mapList(array, CustomerResponseDTO.class);
+	}
 	
 	@Override
 	public String guardarCliente(CustomerRequestDTO customerDto) throws GeneralException {
@@ -126,5 +135,5 @@ public class CustomerServiceImpl implements ICustomerService {
 		}
 		return response;
 	}
-
+	
 }
