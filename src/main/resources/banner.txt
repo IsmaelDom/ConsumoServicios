@@ -1,3 +1,4 @@
+
   o__ __o         o__ __o__/_     o__ __o     ____o__ __o____           __o__   o__ __o        o          o  
  <|     v\       <|    v         /v     v\     /   \   /   \              |    <|     v\      <|\        /|> 
  / \     <\      < >            />       <\         \o/                  / \   / \     <\     / \\o    o// \ 
@@ -8,4 +9,4 @@
   |         v\    |              o       o          <|                    o     |      o       |          |  
  / \         <\  / \  _\o__/_    <\__ __/>          / \                 __|>_  / \  __/>      / \        / \ 
                                                                                                              
-_\__o/_ Powered by IDM ver. ${spring-boot.version} _\o__/_ 
+					_\__o/_ Powered by IDM ver ${spring-boot.version} _\o__/_ 
