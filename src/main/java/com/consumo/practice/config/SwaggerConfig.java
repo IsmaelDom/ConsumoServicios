@@ -29,9 +29,9 @@ public class SwaggerConfig {
 	
 	private ApiInfo getApiInfo() {
 		return new ApiInfo(
-				"API de Consumo",
-				"Consumo de API de Comentarios y Post",
-				"1.0",
+				"API de Consumo y API REST",
+				"Consumo de API de Comentarios y Post y API REST",
+				"1.1",
 				"",
 				new Contact("IDM", "", ""),
 				"LICENSE",
