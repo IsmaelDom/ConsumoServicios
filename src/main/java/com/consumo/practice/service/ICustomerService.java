@@ -7,11 +7,11 @@ public interface ICustomerService {
 	
 	String guardarCliente(CustomerRequestDTO customer) throws GeneralException;
 	
-	/*SalesmanResponseDTO getClienteById(Long idSalesman) throws GeneralException;
+	String actualizarCliente(CustomerRequestDTO customer) throws GeneralException;
 	
-	List<SalesmanResponseDTO> getAllClientes();
-
-	String actualizarCliente(SalesmanRequestDTO salesman) throws GeneralException;
+	CustomerRequestDTO getClienteById(Long id) throws GeneralException;
+	
+	/*List<SalesmanResponseDTO> getAllClientes();
 	
 	String eliminarCliente(Long id) throws GeneralException;
 */

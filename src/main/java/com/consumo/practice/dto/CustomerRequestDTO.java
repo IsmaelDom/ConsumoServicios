@@ -10,19 +10,19 @@ import lombok.Setter;
 @ApiModel(description = "Modelo DTO de entrada para Guardar un Cliente")
 public class CustomerRequestDTO {
 
-	@ApiModelProperty(notes = "Id del cliente", name="Id", required=true, value="idCustomer", example = "1")
+	@ApiModelProperty(notes = "Id del cliente", name="Id", required=true, value="idCustomer", example = "1", position = 0)
 	private Long idCustomer;
 	
-	@ApiModelProperty(notes = "Nombre del cliente", name="Nombre", required=true, value="nombre", example = "Cliente 1")
+	@ApiModelProperty(notes = "Nombre del cliente", name="Nombre", required=true, value="nombre", example = "Cliente 1", position = 1)
 	private String nombre;
 	
-	@ApiModelProperty(notes = "Ciudad del cliente", name="Ciudad", required=true, value="ciudad", example = "Ciudad 1")
+	@ApiModelProperty(notes = "Ciudad del cliente", name="Ciudad", required=true, value="ciudad", example = "Ciudad 1", position = 2)
 	private String ciudad;
 	
-	@ApiModelProperty(notes = "Calificación del cliente", name="Grade", required=true, value="grade", example = "1")
+	@ApiModelProperty(notes = "Calificación del cliente", name="Grade", required=true, value="grade", example = "1", position = 3)
 	private Long grade;
 	
-	@ApiModelProperty(notes = "Id del vendedor", name="SalesmanId", required=true, value="salesmanId", example = "2")
+	@ApiModelProperty(notes = "Id del vendedor", name="SalesmanId", required=true, value="salesmanId", example = "2", position = 4)
 	private Long salesmanId;
 	
 }
