@@ -31,7 +31,7 @@ public class CustomerController {
 		try {
 			return customerService.guardarCliente(customerDTO);
 		} catch (GeneralException e) {
-			(response).sendError(e.getCodigoError(), e.getMessage());
+			(response).sendError(e.getCodeError(), e.getMessage());
             return null;
 		} catch (Exception e) {
             e.printStackTrace();

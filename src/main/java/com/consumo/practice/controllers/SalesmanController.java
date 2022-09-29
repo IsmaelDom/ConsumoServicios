@@ -33,13 +33,13 @@ public class SalesmanController {
 	@Autowired
 	private ISalesmanService salesmanService;
 	
-	@PostMapping("/Guardar")
+	@PostMapping("/guardar")
 	@ApiOperation(value = "Mybatis insertar vendedor", notes = "Guarda un vendedor nuevo")
 	public String guardaVededor(HttpServletResponse response, @RequestBody SalesmanRequestDTO salesmanDto) throws IOException {
 		try {
 			return salesmanService.guardarVendedor(salesmanDto);
 		} catch (GeneralException e) {
-			(response).sendError(e.getCodigoError(), e.getMessage());
+			(response).sendError(e.getCodeError(), e.getMessage());
             return null;
 		} catch (Exception e) {
             e.printStackTrace();
@@ -55,7 +55,7 @@ public class SalesmanController {
 		try {
 			return salesmanService.getVendedorById(id);
 		} catch (GeneralException e) {
-			(response).sendError(e.getCodigoError(), e.getMessage());
+			(response).sendError(e.getCodeError(), e.getMessage());
             return null;
 		} catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class SalesmanController {
         }
 	}
 	
-	@GetMapping("getAll")
+	@GetMapping("/getAll")
 	@ApiOperation(value = "Mybatis consultar todos los vendedores", notes = "Consultar todos los vendedores")
 	public List<SalesmanResponseDTO> getAllVendedor(HttpServletResponse response) throws IOException {
 		try {
@@ -76,13 +76,13 @@ public class SalesmanController {
         }
 	}
 	
-	@PutMapping("/Editar")
+	@PutMapping("/editar")
 	@ApiOperation(value = "Mybatis editar vendedor", notes = "Edita un vendedor")
 	public String editaVededor(HttpServletResponse response, @RequestBody SalesmanRequestDTO salesmanDto) throws IOException {
 		try {
 			return salesmanService.actualizarVendedor(salesmanDto);
 		} catch (GeneralException e) {
-			(response).sendError(e.getCodigoError(), e.getMessage());
+			(response).sendError(e.getCodeError(), e.getMessage());
             return null;
 		} catch (Exception e) {
             e.printStackTrace();
@@ -98,7 +98,7 @@ public class SalesmanController {
 		try {
 			return salesmanService.eliminarVendedor(id);
 		} catch (GeneralException e) {
-			(response).sendError(e.getCodigoError(), e.getMessage());
+			(response).sendError(e.getCodeError(), e.getMessage());
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
