@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("/api/customer")
-@Api(value = "CustomerController", tags = {"Servicios REST para un cliente"})
+@Api(value = "CustomerController", tags = {"Servicios REST para un Cliente"})
 public class CustomerController {
 
 	@Autowired
@@ -72,5 +73,21 @@ public class CustomerController {
             (response).sendError(500, e.getMessage());
             return null;
         }
+	}
+	
+	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Mybatis eliminar cliente por id", notes = "Eliminar un cliente por id")
+	public String eliminarCliente(HttpServletResponse response,
+			@ApiParam(name = "id", value = "id del cliente", example = "1", required = true) @PathVariable long id) throws IOException {
+		try {
+			return customerService.eliminarCliente(id);
+		} catch (GeneralException e) {
+			(response).sendError(e.getCodeError(), e.getMessage());
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			(response).sendError(500, e.getMessage());
+			return null;
+		}
 	}
 }

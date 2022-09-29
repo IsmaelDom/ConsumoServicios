@@ -11,8 +11,7 @@ public interface ICustomerService {
 	
 	CustomerRequestDTO getClienteById(Long id) throws GeneralException;
 	
-	/*List<SalesmanResponseDTO> getAllClientes();
-	
 	String eliminarCliente(Long id) throws GeneralException;
-*/
+	
+	//List<SalesmanResponseDTO> getAllClientes();
 }

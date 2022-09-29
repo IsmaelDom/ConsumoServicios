@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("/api/salesman")
-@Api(value = "SalesmanController", tags = {"Servicios REST para un vendedor"})
+@Api(value = "SalesmanController", tags = {"Servicios REST para un Vendedor"})
 public class SalesmanController {
 
 	@Autowired

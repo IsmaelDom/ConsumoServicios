@@ -101,4 +101,30 @@ public class CustomerServiceImpl implements ICustomerService {
 		return dto;
 	}
 
+	@Override
+	public String eliminarCliente(Long id) throws GeneralException {
+		String response;
+		
+		if (id != null) {
+			Customer customer = customerMapper.getById(id);
+			
+			if (!Objects.isNull(customer)) {
+				int respuesta = customerMapper.eliminar(id);
+
+				if (respuesta == 1) {
+					log.info("Se elimino correctamente el cliente: " + customer.getNombre());
+					response = "Se elimino el cliente " + customer.getNombre();
+				} else {
+					log.info("Error al eliminar el cliente");
+					response = "Error al intentar eliminar el cliente " + customer.getNombre();
+				}
+			} else {
+				throw new GeneralException("No se encontro el cliente " + id, 404);
+			}
+		} else {
+			throw new GeneralException("El id del cliente es requerido", 400);
+		}
+		return response;
+	}
+
 }
